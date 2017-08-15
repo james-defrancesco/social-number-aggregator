@@ -1,0 +1,42 @@
+<%= form_with(model: influencer, local: true) do |form| %>
+  <% if influencer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(influencer.errors.count, "error") %> prohibited this influencer from being saved:</h2>
+
+      <ul>
+      <% influencer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name, id: :influencer_full_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :facebook %>
+    <%= form.text_field :facebook, id: :influencer_facebook %>
+  </div>
+
+  <div class="field">
+    <%= form.label :instagram %>
+    <%= form.text_field :instagram, id: :influencer_instagram %>
+  </div>
+
+  <div class="field">
+    <%= form.label :twitter %>
+    <%= form.text_field :twitter, id: :influencer_twitter %>
+  </div>
+
+  <div class="field">
+    <%= form.label :youtube %>
+    <%= form.text_field :youtube, id: :influencer_youtube %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
