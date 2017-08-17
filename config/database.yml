@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: social_counter_production
-  username: social_counter
-  password: <%= ENV['SOCIAL_COUNTER_DATABASE_PASSWORD'] %>
+  #username: social_counter
+  #password: <%= ENV['SOCIAL_COUNTER_DATABASE_PASSWORD'] %>
