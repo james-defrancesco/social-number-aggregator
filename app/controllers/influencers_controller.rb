@@ -4,7 +4,7 @@ class InfluencersController < ApplicationController
   # GET /influencers
   # GET /influencers.json
   def index
-    @influencers = Influencer.all
+    @influencers = Influencer.order('created_at DESC').all
   end
 
   # GET /influencers/1
@@ -71,4 +71,5 @@ class InfluencersController < ApplicationController
     def influencer_params
       params.require(:influencer).permit(:full_name, :facebook, :instagram, :twitter, :youtube)
     end
+
 end

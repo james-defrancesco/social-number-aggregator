@@ -11,32 +11,57 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :full_name %>
-    <%= form.text_field :full_name, id: :influencer_full_name %>
-  </div>
+  <div class="field is-horizontal ">
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= form.text_field :full_name, id: :influencer_full_name, class: "input",placeholder: "Full Name" %>
+        <span class="icon is-left">
+        <i class="fa fa-address-card"></i>
+      </span>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :facebook %>
-    <%= form.text_field :facebook, id: :influencer_facebook %>
-  </div>
+    <!-- <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%#= form.text_field :facebook, id: :influencer_full_name, class: "input", placeholder: "Facebook" %>
+          <span class="icon is-left">
+        <i class="fa fa-facebook"></i>
+      </span>
+      </div>
+    </div> -->
 
-  <div class="field">
-    <%= form.label :instagram %>
-    <%= form.text_field :instagram, id: :influencer_instagram %>
-  </div>
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= form.text_field :instagram, id: :influencer_full_name, class: "input", placeholder: "instagram" %>
+          <span class="icon is-left">
+        <i class="fa fa-instagram"></i>
+      </span>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :twitter %>
-    <%= form.text_field :twitter, id: :influencer_twitter %>
-  </div>
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= form.text_field :twitter, id: :influencer_full_name, class: "input", placeholder: "twitter" %>
+          <span class="icon is-left">
+        <i class="fa fa-twitter"></i>
+      </span>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :youtube %>
-    <%= form.text_field :youtube, id: :influencer_youtube %>
-  </div>
+    <div class="field">
+      <div class="field-body"> 
+        <div class="control has-icons-left has-icons-right">
+          <%= form.text_field :youtube, id: :influencer_full_name, class: "input", placeholder: "youtube" %>
+          <span class="icon is-left">
+            <i class="fa fa-youtube"></i>
+          </span>
+        </div>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="actions">
+      <%= form.submit class: "button is-primary" %>
+    </div>
   </div>
+  
 <% end %>

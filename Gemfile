@@ -24,25 +24,33 @@ gem "font-awesome-rails"
 
 # social
 gem 'twitter', '~> 6.1'
-gem 'omniauth-facebook', '~> 4.0'
-gem 'omniauth-instagram', '~> 1.1'
-gem 'youtube', '~> 0.8.6' 
+gem "koala"
+gem 'insta_scraper'
+gem 'yt', '~> 0.28.0'
+
 
 # Back end
 gem 'pg', '~> 0.19'
 gem 'devise', '~> 4.2'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'httparty', '~> 0.15.6'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
+  gem 'byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara', '~> 2.6', '>= 2.6.2'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+  gem 'guard-rspec', require: false
 end
 
 group :development do
+  gem 'puma'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'

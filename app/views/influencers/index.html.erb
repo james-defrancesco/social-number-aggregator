@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Influencers</h1>
+<h1 class="title">INFLUENCERS</h1>
 
-<table>
+<table class="table is-striped">
   <thead>
     <tr>
       <th>Full name</th>
-      <th>Facebook</th>
+      <!-- <th>Facebook</th> -->
       <th>Instagram</th>
       <th>Twitter</th>
       <th>Youtube</th>
@@ -18,10 +18,10 @@
     <% @influencers.each do |influencer| %>
       <tr>
         <td><%= influencer.full_name %></td>
-        <td><%= influencer.facebook %></td>
-        <td><%= influencer.instagram %></td>
-        <td><%= influencer.twitter %></td>
-        <td><%= influencer.youtube %></td>
+        <!-- <td class="align-right"><%#= number_with_delimiter(Influencer.get_facebook_numbers(influencer.facebook), :delimiter => ',') %></td> -->
+        <td class="align-right"><%= number_with_delimiter(Influencer.get_instagram_numbers(influencer.instagram), :delimiter => ',')  %></td>
+        <td class="align-right"><%= number_with_delimiter(Influencer.get_twitter_numbers(influencer.twitter), :delimiter => ',')  %></td>
+        <td class="align-right"><%= number_with_delimiter(Influencer.get_youtube_numbers(influencer.youtube), :delimiter => ',') %></td>
         <td><%= link_to 'Show', influencer %></td>
         <td><%= link_to 'Edit', edit_influencer_path(influencer) %></td>
         <td><%= link_to 'Destroy', influencer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
