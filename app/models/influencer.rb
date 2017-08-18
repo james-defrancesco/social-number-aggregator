@@ -9,13 +9,15 @@ class Influencer < ApplicationRecord
       Rails.logger.info("following - sleeping #{distance_of_time_in_words Time.now, sleepy_time.secs}")
       sleep sleepy_time
       retry
+    rescue Twitter::Error::NotFound => e
+        return '*'
     end
   end
 
   def self.get_youtube_numbers(sub_id)
     @id = sub_id
-    # todo: 
-    # get you id converter: 
+    # todo:
+    # get you id converter:
     #   https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDsGZDPI461UR5JvTysAqv7PW7HSzj50KU&forUsername=" + $scope.channelName + "&part=id"
     begin
       channel = Yt::Channel.new id: "#{@id}"
@@ -50,7 +52,7 @@ class Influencer < ApplicationRecord
     )
     if data['items'].empty?
       return id
-    end 
+    end
     data = data['items'][0]['id']
     Rails.logger.info "\n\n\n #{data}\n\n\n"
   end
