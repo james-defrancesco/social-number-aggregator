@@ -4,6 +4,7 @@ class Influencer < ApplicationRecord
   scope :alphabetically, -> { order("last_name ASC") }  
 
   def self.get_twitter_numbers(user)
+    return unless is_good_time.empty?
     begin
       TWITTER_CLIENT.user(user).followers_count
     rescue Twitter::Error::TooManyRequests => e
@@ -17,6 +18,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.get_youtube_numbers(sub_id)
+    return unless is_good_time.empty?
     @id = sub_id
     # todo:
     # get you id converter:
@@ -31,6 +33,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.get_instagram_numbers(user)
+    return unless is_good_time.empty? 
     begin
       ig = InstaScraper::HTML::Account.new(user.gsub(/^@/,''))
       ig.data.deep_find('followed_by').fetch('count')
@@ -40,11 +43,6 @@ class Influencer < ApplicationRecord
   end
 
   def self.get_facebook_numbers(user)
-    # begin
-    #   FACEBOOK_CLIENT.get_connections(user, "likes")
-    # rescue => e
-    #   return "#{e.message}"
-    # end
     ''
   end
 
@@ -57,6 +55,10 @@ class Influencer < ApplicationRecord
     end
     data = data['items'][0]['id']
     Rails.logger.info "\n\n\n #{data}\n\n\n"
+  end
+
+  def self.is_good_time
+    where('last_checked < ?', 30.minutes.ago)
   end
 
 end

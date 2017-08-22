@@ -5,6 +5,7 @@ class InfluencersController < ApplicationController
   # GET /influencers.json
   def index
     @influencers = Influencer.alphabetically
+    update_user_numbers
   end
 
   # GET /influencers/1
@@ -71,5 +72,17 @@ class InfluencersController < ApplicationController
     def influencer_params
       params.require(:influencer).permit(:full_name, :facebook, :instagram, :twitter, :youtube)
     end
-
+    
+    def update_user_numbers
+      Influencer.all.each do |influencer|
+        break unless influencer.last_checked < 30.minutes.ago
+        params = {
+          ig:           Influencer.get_instagram_numbers(influencer.instagram),
+          tw:           Influencer.get_twitter_numbers(influencer.twitter),
+          yt:           Influencer.get_youtube_numbers(influencer.youtube),
+          last_checked: Time.now
+        }
+        influencer.update_attributes params
+      end
+    end
 end
