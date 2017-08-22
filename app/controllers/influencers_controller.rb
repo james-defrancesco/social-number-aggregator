@@ -4,7 +4,7 @@ class InfluencersController < ApplicationController
   # GET /influencers
   # GET /influencers.json
   def index
-    @influencers = Influencer.order('created_at DESC').all
+    @influencers = Influencer.alphabetically
   end
 
   # GET /influencers/1

@@ -11,16 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field is-horizontal ">
-    <div class="field">
-      <div class="control has-icons-left has-icons-right">
-        <%= form.text_field :full_name, id: :influencer_full_name, class: "input",placeholder: "Full Name" %>
-        <span class="icon is-left">
-        <i class="fa fa-address-card"></i>
-      </span>
+    <div class="field is-horizontal ">
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <%= form.text_field :first_name, id: :influencer_first_name, class: "input",placeholder: "First Name" %>
+          <span class="icon is-left">
+            <i class="fa fa-address-card"></i>
+          </span>
+        </div>
       </div>
-    </div>
 
+      <div class="field is-horizontal ">
+        <div class="field">
+          <div class="control has-icons-left has-icons-right">
+            <%= form.text_field :last_name, id: :influencer_last_name, class: "input",placeholder: "Last Name" %>
+            <span class="icon is-left">
+              <i class="fa fa-address-card"></i>
+            </span>
+          </div>
+        </div>
+
+        
     <!-- <div class="field">
       <div class="control has-icons-left has-icons-right">
         <%#= form.text_field :facebook, id: :influencer_full_name, class: "input", placeholder: "Facebook" %>

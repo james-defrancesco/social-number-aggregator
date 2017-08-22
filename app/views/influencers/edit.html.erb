@@ -1,6 +1,9 @@
 <h1>Editing Influencer</h1>
 
-<%= render 'form', influencer: @influencer %>
+<div class="section">
+  <%= render 'form', influencer: @influencer %>
+</div>
 
-<%= link_to 'Show', @influencer %> |
-<%= link_to 'Back', influencers_path, class: "button is-primary" %>
+
+<%= link_to 'Show', @influencer, class: " " %> |
+<%= link_to 'Back', influencers_path, class: "" %>
