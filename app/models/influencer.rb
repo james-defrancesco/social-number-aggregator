@@ -1,7 +1,7 @@
 class Influencer < ApplicationRecord
   require 'net/http'
 
-  scope :alphabetically, -> { order("full_name ASC") }  
+  scope :alphabetically, -> { order("last_name ASC") }  
 
   def self.get_twitter_numbers(user)
     begin
