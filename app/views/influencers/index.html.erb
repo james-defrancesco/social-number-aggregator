@@ -17,7 +17,7 @@
   <tbody>
     <% @influencers.each do |influencer| %>
       <tr>
-        <td><%= influencer.full_name %></td>
+        <td><%= "#{influencer.first_name} #{influencer.last_name}" %></td>
         <!-- <td class="align-right"><%#= number_with_delimiter(Influencer.get_facebook_numbers(influencer.facebook), :delimiter => ',') %></td> -->
         <td class="align-right"><%= number_with_delimiter(Influencer.get_instagram_numbers(influencer.instagram), :delimiter => ',')  %></td>
         <td class="align-right"><%= number_with_delimiter(Influencer.get_twitter_numbers(influencer.twitter), :delimiter => ',')  %></td>
