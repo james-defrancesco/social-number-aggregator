@@ -1,8 +1,10 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <%= notice %>
+</p>
 <div class="container">
   <%= link_to root_path do %>
     <h1 class="title">INFLUENCERS</h1>
-    <% end %>
+  <% end %>
 </div>
 
 <section class="hero">
@@ -27,7 +29,6 @@
 
 
 
-
 <table class="table is-striped">
   <thead>
     <tr>
@@ -41,18 +42,32 @@
   </thead>
 
   <tbody>
-    <% @influencers.each do |influencer| %>
+    <% @search.each do |influencer| %>
       <tr>
-        <td><%= "#{influencer.first_name} #{influencer.last_name}" %></td>
+        <td>
+          <%= "#{influencer.first_name} #{influencer.last_name}" %>
+        </td>
         <!-- <td class="align-right"><%#= number_with_delimiter(Influencer.get_facebook_numbers(influencer.facebook), :delimiter => ',') %></td> -->
-        <td class="align-right"><%= number_with_delimiter(Influencer.get_instagram_numbers(influencer.instagram), :delimiter => ',')  %></td>
-        <td class="align-right"><%= number_with_delimiter(Influencer.get_twitter_numbers(influencer.twitter), :delimiter => ',')  %></td>
-        <td class="align-right"><%= number_with_delimiter(Influencer.get_youtube_numbers(influencer.youtube), :delimiter => ',') %></td>
-        <td><%= link_to 'Show', influencer %></td>
-        <td><%= link_to 'Edit', edit_influencer_path(influencer) %></td>
-        <td><%= link_to 'Destroy', influencer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="align-right">
+          <%= number_with_delimiter(Influencer.get_instagram_numbers(influencer.instagram), :delimiter => ',')  %>
+        </td>
+        <td class="align-right">
+          <%= number_with_delimiter(Influencer.get_twitter_numbers(influencer.twitter), :delimiter => ',')  %>
+        </td>
+        <td class="align-right">
+          <%= number_with_delimiter(Influencer.get_youtube_numbers(influencer.youtube), :delimiter => ',') %>
+        </td>
+        <td>
+          <%= link_to 'Show', influencer %>
+        </td>
+        <td>
+          <%= link_to 'Edit', edit_influencer_path(influencer) %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', influencer, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
-    <% end %>
+      <% end %>
   </tbody>
 </table>
 

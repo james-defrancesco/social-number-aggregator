@@ -1,11 +1,11 @@
 class InfluencersController < ApplicationController
   before_action :set_influencer, only: [:show, :edit, :update, :destroy]
+  after_action :update_user_numbers, only: :search
 
   # GET /influencers
   # GET /influencers.json
   def index
     @influencers = Influencer.alphabetically
-    update_user_numbers
   end
 
   # GET /influencers/1
@@ -26,7 +26,6 @@ class InfluencersController < ApplicationController
   # POST /influencers.json
   def create
     @influencer = Influencer.new(influencer_params)
-
     respond_to do |format|
       if @influencer.save
         format.html { redirect_to @influencer, notice: 'Influencer was successfully created.' }
@@ -62,6 +61,14 @@ class InfluencersController < ApplicationController
     end
   end
 
+  def search_influencer
+    @search = Influencer.search(params[:search])
+  end
+
+  def search
+    redirect_to search_influencer_path(params[:q])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_influencer
@@ -75,7 +82,7 @@ class InfluencersController < ApplicationController
     
     def update_user_numbers
       Influencer.all.each do |influencer|
-        break unless influencer.last_checked < 30.minutes.ago
+        next if influencer.last_checked < 30.minutes.ago
         params = {
           ig:           Influencer.get_instagram_numbers(influencer.instagram),
           tw:           Influencer.get_twitter_numbers(influencer.twitter),

@@ -27,7 +27,6 @@ class Influencer < ApplicationRecord
       channel = Yt::Channel.new id: "#{@id}"
       channel.subscriber_count
     rescue Yt::Errors::NoItems => e
-      # Rails.logger.info "Youtubed returned nil"
       return ''
     end
   end
@@ -55,6 +54,12 @@ class Influencer < ApplicationRecord
     end
     data = data['items'][0]['id']
     Rails.logger.info "\n\n\n #{data}\n\n\n"
+  end
+
+  def self.search(search)
+    where('first_name ILIKE ?',"%#{search}%").or( 
+      where('last_name ILIKE ?',"%#{search}%")
+    ).limit(5)
   end
 
   def self.is_good_time
