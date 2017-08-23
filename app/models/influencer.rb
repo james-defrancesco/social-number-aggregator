@@ -4,7 +4,7 @@ class Influencer < ApplicationRecord
   scope :alphabetically, -> { order("last_name ASC") }  
 
   def self.get_twitter_numbers(user)
-    return unless is_good_time.empty?
+    #return tw unless is_good_time.empty?
     begin
       TWITTER_CLIENT.user(user).followers_count
     rescue Twitter::Error::TooManyRequests => e
@@ -18,7 +18,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.get_youtube_numbers(sub_id)
-    return unless is_good_time.empty?
+    #return unless is_good_time.empty?
     @id = sub_id
     # todo:
     # get you id converter:
@@ -32,7 +32,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.get_instagram_numbers(user)
-    return unless is_good_time.empty? 
+    #return unless is_good_time.empty? 
     begin
       ig = InstaScraper::HTML::Account.new(user.gsub(/^@/,''))
       ig.data.deep_find('followed_by').fetch('count')

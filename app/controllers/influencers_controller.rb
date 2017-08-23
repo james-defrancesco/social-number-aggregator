@@ -1,7 +1,7 @@
 class InfluencersController < ApplicationController
   before_action :set_influencer, only: [:show, :edit, :update, :destroy]
-  after_action :get_user_social, only: [:edit, :update]
   before_action :update_users_social, only: [:index]
+  after_action :get_user_social, only: [:edit, :update]
 
 
   # GET /influencers
@@ -22,6 +22,7 @@ class InfluencersController < ApplicationController
 
   # GET /influencers/1/edit
   def edit
+    get_user_social
   end
 
   # POST /influencers
@@ -44,6 +45,7 @@ class InfluencersController < ApplicationController
   def update
     respond_to do |format|
       if @influencer.update(influencer_params)
+        get_user_social
         format.html { redirect_to root_path, notice: 'Influencer was successfully updated.' }
         format.json { render :root, status: :ok, location: @influencer }
       else
@@ -92,7 +94,7 @@ class InfluencersController < ApplicationController
             last_checked: Time.now
           }
           next if params.values.any?{|i|i.nil? || i.nil? || i == 0 }
-          influencer.update_attributes params
+          influencer.update_attributes! params
         else 
           next
         end
@@ -100,13 +102,15 @@ class InfluencersController < ApplicationController
     end
 
     def get_user_social
-      
+      logger.info "\n\ngetting user info\n\n"
       params = {
         ig:           Influencer.get_instagram_numbers(@influencer.instagram),
         tw:           Influencer.get_twitter_numbers(@influencer.twitter),
         yt:           Influencer.get_youtube_numbers(@influencer.youtube),
         last_checked: Time.now
       }
-      @influencer.update_attributes params
+      logger.info "\n\nuser info:\n\t#{@influencer.instagram}\n\n"
+      logger.info "\n\nuser info:\n\t#{params.inspect}\n\n"
+      @influencer.update_attributes! params
     end
 end
