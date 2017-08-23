@@ -91,7 +91,8 @@ class InfluencersController < ApplicationController
             yt:           Influencer.get_youtube_numbers(influencer.youtube),
             last_checked: Time.now
           }
-          influencer.update_attributes! params
+          next if params.values.any?{|i|i.nil? || i.nil? || i == 0 }
+          influencer.update_attributes params
         else 
           next
         end
@@ -99,13 +100,13 @@ class InfluencersController < ApplicationController
     end
 
     def get_user_social
-
+      
       params = {
         ig:           Influencer.get_instagram_numbers(@influencer.instagram),
         tw:           Influencer.get_twitter_numbers(@influencer.twitter),
         yt:           Influencer.get_youtube_numbers(@influencer.youtube),
         last_checked: Time.now
       }
-      @influencer.update_attributes! params
+      @influencer.update_attributes params
     end
 end
