@@ -82,14 +82,17 @@ class InfluencersController < ApplicationController
     
     def update_user_numbers
       Influencer.all.each do |influencer|
-        next unless influencer.last_checked < 30.minutes.ago
-        params = {
-          ig:           Influencer.get_instagram_numbers(influencer.instagram),
-          tw:           Influencer.get_twitter_numbers(influencer.twitter),
-          yt:           Influencer.get_youtube_numbers(influencer.youtube),
-          last_checked: Time.now
-        }
-        influencer.update_attributes params
+        if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago  
+          params = {
+            ig:           Influencer.get_instagram_numbers(influencer.instagram),
+            tw:           Influencer.get_twitter_numbers(influencer.twitter),
+            yt:           Influencer.get_youtube_numbers(influencer.youtube),
+            last_checked: Time.now
+          }
+          influencer.update_attributes params
+        else 
+          next
+        end
       end
     end
 end
