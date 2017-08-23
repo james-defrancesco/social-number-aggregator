@@ -1,7 +1,7 @@
 class InfluencersController < ApplicationController
   before_action :set_influencer, only: [:show, :edit, :update, :destroy]
   after_action :get_user_social, only: [:edit, :update]
-  after_action :update_users_social, only: [:index]
+  before_action :update_users_social, only: [:index]
 
 
   # GET /influencers
