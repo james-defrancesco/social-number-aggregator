@@ -1,6 +1,8 @@
 class InfluencersController < ApplicationController
   before_action :set_influencer, only: [:show, :edit, :update, :destroy]
-  after_action :update_user_numbers, only: :index
+  after_action :get_user_social, only: [:edit, :update]
+  after_action :update_users_social, only: [:index]
+
 
   # GET /influencers
   # GET /influencers.json
@@ -77,22 +79,33 @@ class InfluencersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def influencer_params
-      params.require(:influencer).permit(:full_name, :facebook, :instagram, :twitter, :youtube)
+      params.require(:influencer).permit(:first_name, :last_name, :facebook, :instagram, :twitter, :youtube)
     end
     
-    def update_user_numbers
+    def update_users_social
       Influencer.all.each do |influencer|
-        if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago  
-          params = {
+        if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago            
+           params = {
             ig:           Influencer.get_instagram_numbers(influencer.instagram),
             tw:           Influencer.get_twitter_numbers(influencer.twitter),
             yt:           Influencer.get_youtube_numbers(influencer.youtube),
             last_checked: Time.now
           }
-          influencer.update_attributes params
+          influencer.update_attributes! params
         else 
           next
         end
       end
+    end
+
+    def get_user_social
+
+      params = {
+        ig:           Influencer.get_instagram_numbers(@influencer.instagram),
+        tw:           Influencer.get_twitter_numbers(@influencer.twitter),
+        yt:           Influencer.get_youtube_numbers(@influencer.youtube),
+        last_checked: Time.now
+      }
+      @influencer.update_attributes! params
     end
 end
