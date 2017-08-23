@@ -44,8 +44,8 @@ class InfluencersController < ApplicationController
   def update
     respond_to do |format|
       if @influencer.update(influencer_params)
-        format.html { redirect_to @influencer, notice: 'Influencer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @influencer }
+        format.html { redirect_to root_path, notice: 'Influencer was successfully updated.' }
+        format.json { render :root, status: :ok, location: @influencer }
       else
         format.html { render :edit }
         format.json { render json: @influencer.errors, status: :unprocessable_entity }
