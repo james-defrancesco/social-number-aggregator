@@ -82,7 +82,7 @@ class InfluencersController < ApplicationController
     
     def update_user_numbers
       Influencer.all.each do |influencer|
-        next if influencer.last_checked < 30.minutes.ago
+        next unless influencer.last_checked < 30.minutes.ago
         params = {
           ig:           Influencer.get_instagram_numbers(influencer.instagram),
           tw:           Influencer.get_twitter_numbers(influencer.twitter),
