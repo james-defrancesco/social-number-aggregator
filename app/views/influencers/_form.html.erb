@@ -1,4 +1,5 @@
 <%= form_with(model: influencer, local: true) do |form| %>
+  
   <% if influencer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(influencer.errors.count, "error") %> prohibited this influencer from being saved:</h2>

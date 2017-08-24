@@ -8,8 +8,9 @@ class InfluencersController < ApplicationController
   # GET /influencers.json
   def index
     @influencers = Influencer.alphabetically
+    @count = get_total_count
   end
-
+ 
   # GET /influencers/1
   # GET /influencers/1.json
   def show
@@ -99,6 +100,14 @@ class InfluencersController < ApplicationController
           next
         end
       end
+    end
+
+    def get_total_count
+      count = 0
+      Influencer.all.each do |influencer|
+        count += (influencer.ig.to_i + influencer.tw.to_i + influencer.yt.to_i)     
+      end
+      count
     end
 
     def get_user_social
