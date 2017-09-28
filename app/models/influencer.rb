@@ -56,7 +56,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.search(search)
-    where('first_name LIKE :search OR last_name LIKE :search OR company LIKE :search', search: "%#{search}%")
+    where('first_name ILIKE :search OR last_name ILIKE :search OR company ILIKE :search', search: "%#{search}%")
   end
 
   def self.is_good_time
