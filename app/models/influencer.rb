@@ -9,11 +9,10 @@ class Influencer < ApplicationRecord
       TWITTER_CLIENT.user(user).followers_count
     rescue Twitter::Error::TooManyRequests => e
       sleepy_time = e.rate_limit.reset_in + 1
-      Rails.logger.info("following - sleeping #{distance_of_time_in_words Time.now, sleepy_time.secs}")
-      sleep sleepy_time
-      retry
+      Rails.logger.info("following - sleeping #{distance_of_time_in_words Time.now, sleepy_time}")
+      return 'F: Check back in 1h' 
     rescue Twitter::Error::NotFound => e
-        return '*'
+      return '*'
     end
   end
 
@@ -27,7 +26,7 @@ class Influencer < ApplicationRecord
       channel = Yt::Channel.new id: "#{@id}"
       channel.subscriber_count
     rescue Yt::Errors::NoItems => e
-      return ''
+      return '*'
     end
   end
 
@@ -37,7 +36,7 @@ class Influencer < ApplicationRecord
       ig = InstaScraper::HTML::Account.new(user.gsub(/^@/,''))
       ig.data.deep_find('followed_by').fetch('count')
     rescue
-      return nil
+      return '*'
     end
   end
 
