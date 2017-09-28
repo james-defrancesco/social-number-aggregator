@@ -9,7 +9,7 @@
   <div class="hero-body" style="padding: 3rem 0;">
     <div class="container">
       <h1 class="">
-
+        <%= link_to 'New Influencer', new_influencer_path %>
         <div class="control has-icons-left has-icons-right">
           <%= form_tag search_influencer_influencers_path, method: 'get' do %>
             <%= text_field_tag :search, params[:search], class: 'input is-large', placeholder: 'Search' %>
