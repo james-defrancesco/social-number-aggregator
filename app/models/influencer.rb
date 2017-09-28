@@ -10,7 +10,7 @@ class Influencer < ApplicationRecord
     rescue Twitter::Error::TooManyRequests => e
       sleepy_time = e.rate_limit.reset_in + 1
       Rails.logger.info("following - sleeping #{distance_of_time_in_words Time.now, sleepy_time}")
-      return 'F: Check back in 1h' 
+      return 'F: Check back in 1h'
     rescue Twitter::Error::NotFound => e
       return '*'
     end
@@ -56,10 +56,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.search(search)
-    where('first_name ILIKE ?',"%#{search}%").or(
-      where('last_name ILIKE ?',"%#{search}%").or(
-      where('company ILIKE ?',"%#{search}%")
-    ))
+    where('first_name LIKE :search OR last_name LIKE :search OR company LIKE :search', search: "%#{search}%")
   end
 
   def self.is_good_time
