@@ -74,6 +74,24 @@ class InfluencersController < ApplicationController
   def search
     redirect_to search_influencer_path(params[:q])
   end
+  
+  def update_users_social
+    Influencer.all.each do |influencer|
+      if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago
+         params = {
+          ig:           Influencer.get_instagram_numbers(influencer.instagram),
+          tw:           Influencer.get_twitter_numbers(influencer.twitter),
+          yt:           Influencer.get_youtube_numbers(influencer.youtube),
+          last_checked: Time.now
+        }
+        next if params.values.any?{|i|i.nil? || i.nil? || i == 0 }
+        influencer.update_attributes! params
+      else
+        next
+      end
+    end
+    redirect_to root_path
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -86,23 +104,7 @@ class InfluencersController < ApplicationController
       params.require(:influencer).permit(:first_name, :last_name, :facebook, :instagram, :twitter, :youtube, :company)
     end
 
-    def update_users_social
-      Influencer.all.each do |influencer|
-        if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago
-           params = {
-            ig:           Influencer.get_instagram_numbers(influencer.instagram),
-            tw:           Influencer.get_twitter_numbers(influencer.twitter),
-            yt:           Influencer.get_youtube_numbers(influencer.youtube),
-            last_checked: Time.now
-          }
-          next if params.values.any?{|i|i.nil? || i.nil? || i == 0 }
-          influencer.update_attributes! params
-        else
-          next
-        end
-      end
-      redirect_to root_path
-    end
+
 
     def get_total_count
       count = 0
