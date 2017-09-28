@@ -60,7 +60,7 @@ class Influencer < ApplicationRecord
     where('first_name ILIKE ?',"%#{search}%").or(
       where('last_name ILIKE ?',"%#{search}%").or(
       where('company ILIKE ?',"%#{search}%")
-    ).limit(5)
+    )).limit(5)
   end
 
   def self.is_good_time
