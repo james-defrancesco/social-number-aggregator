@@ -1,5 +1,5 @@
 <%= form_with(model: influencer, local: true) do |form| %>
-  
+
   <% if influencer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(influencer.errors.count, "error") %> prohibited this influencer from being saved:</h2>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="field">
-      <div class="field-body"> 
+      <div class="field-body">
         <div class="control has-icons-left has-icons-right">
           <%= form.text_field :youtube, id: :youtube, class: "input", placeholder: "youtube" %>
           <span class="icon is-left">
@@ -63,9 +63,18 @@
       </div>
     </div>
 
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <%= form.text_field :company, id: :company, class: "input", placeholder: "company" %>
+          <span class="icon is-left">
+        <i class="fa fa-company"></i>
+      </span>
+      </div>
+    </div>
+
     <div class="actions">
       <%= form.submit class: "button is-primary" %>
     </div>
   </div>
-  
+
 <% end %>

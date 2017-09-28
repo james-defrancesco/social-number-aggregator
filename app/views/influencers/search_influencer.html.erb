@@ -37,7 +37,8 @@
       <th style="text-align: right !important;">Instagram</th>
       <th style="text-align: right !important;">Twitter</th>
       <th style="text-align: right !important;">Youtube</th>
-      <th colspan="3"></th>
+      <th style="text-align: right !important;">Company</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -56,6 +57,9 @@
         </td>
         <td class="align-right">
           <%= number_with_delimiter(Influencer.get_youtube_numbers(influencer.youtube), :delimiter => ',') %>
+        </td>
+        <td class="align-right">
+          <%= influencer.company %>
         </td>
         <td>
           <%= link_to 'Show', influencer %>

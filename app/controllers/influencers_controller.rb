@@ -10,7 +10,7 @@ class InfluencersController < ApplicationController
     @influencers = Influencer.alphabetically
     @count = get_total_count
   end
- 
+
   # GET /influencers/1
   # GET /influencers/1.json
   def show
@@ -68,6 +68,7 @@ class InfluencersController < ApplicationController
 
   def search_influencer
     @search = Influencer.search(params[:search])
+    
   end
 
   def search
@@ -82,12 +83,12 @@ class InfluencersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def influencer_params
-      params.require(:influencer).permit(:first_name, :last_name, :facebook, :instagram, :twitter, :youtube)
+      params.require(:influencer).permit(:first_name, :last_name, :facebook, :instagram, :twitter, :youtube, :company)
     end
-    
+
     def update_users_social
       Influencer.all.each do |influencer|
-        if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago            
+        if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago
            params = {
             ig:           Influencer.get_instagram_numbers(influencer.instagram),
             tw:           Influencer.get_twitter_numbers(influencer.twitter),
@@ -96,7 +97,7 @@ class InfluencersController < ApplicationController
           }
           next if params.values.any?{|i|i.nil? || i.nil? || i == 0 }
           influencer.update_attributes! params
-        else 
+        else
           next
         end
       end
@@ -105,7 +106,7 @@ class InfluencersController < ApplicationController
     def get_total_count
       count = 0
       Influencer.all.each do |influencer|
-        count += (influencer.ig.to_i + influencer.tw.to_i + influencer.yt.to_i)     
+        count += (influencer.ig.to_i + influencer.tw.to_i + influencer.yt.to_i)
       end
       count
     end

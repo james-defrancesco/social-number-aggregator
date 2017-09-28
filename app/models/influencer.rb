@@ -1,7 +1,7 @@
 class Influencer < ApplicationRecord
   require 'net/http'
 
-  scope :alphabetically, -> { order("last_name ASC") }  
+  scope :alphabetically, -> { order("last_name ASC") }
 
   def self.get_twitter_numbers(user)
     #return tw unless is_good_time.empty?
@@ -32,7 +32,7 @@ class Influencer < ApplicationRecord
   end
 
   def self.get_instagram_numbers(user)
-    #return unless is_good_time.empty? 
+    #return unless is_good_time.empty?
     begin
       ig = InstaScraper::HTML::Account.new(user.gsub(/^@/,''))
       ig.data.deep_find('followed_by').fetch('count')
@@ -57,8 +57,9 @@ class Influencer < ApplicationRecord
   end
 
   def self.search(search)
-    where('first_name ILIKE ?',"%#{search}%").or( 
-      where('last_name ILIKE ?',"%#{search}%")
+    where('first_name ILIKE ?',"%#{search}%").or(
+      where('last_name ILIKE ?',"%#{search}%").or(
+      where('company ILIKE ?',"%#{search}%")
     ).limit(5)
   end
 

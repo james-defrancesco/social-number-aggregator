@@ -6,6 +6,7 @@ class CreateInfluencers < ActiveRecord::Migration[5.1]
       t.string :instagram
       t.string :twitter
       t.string :youtube
+      t.string :company
 
       t.timestamps
     end

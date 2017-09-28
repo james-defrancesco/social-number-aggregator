@@ -9,12 +9,15 @@
   <div class="hero-body" style="padding: 3rem 0;">
     <div class="container">
       <h1 class="">
+
         <div class="control has-icons-left has-icons-right">
           <%= form_tag search_influencer_influencers_path, method: 'get' do %>
             <%= text_field_tag :search, params[:search], class: 'input is-large', placeholder: 'Search' %>
               <span class="icon is-medium is-left">
             <i class="fa fa-search"></i>
           </span>
+
+
               <span class="icon is-medium is-right">
             <i class="fa fa-check"></i>
           </span>
@@ -37,10 +40,11 @@
       <th style="text-align: right !important;">Twitter</th>
       <th style="text-align: right !important;">Youtube</th>
       <th style="text-align: right !important;">Total</th>
-      <th colspan="3"></th>
+      <th style="text-align: right !important;">Company</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
-  
+
   <tfoot>
     <tr>
       <td></td>
@@ -61,16 +65,16 @@
         <td class="align-right"><%= number_with_delimiter(influencer.ig, delimiter: ',')  %></td>
         <td class="align-right"><%= number_with_delimiter(influencer.tw, delimiter: ',')  %></td>
         <td class="align-right"><%= number_with_delimiter(influencer.yt, delimiter: ',') %></td>
+
         <td class="align-right">
           <%= number_with_delimiter((influencer.ig.to_i + influencer.tw.to_i + influencer.yt.to_i), :delimiter => ',') %>
         </td>
+        <td class="align-right"><%= influencer.company %></td>
         <td><%= link_to 'Edit', edit_influencer_path(influencer) %></td>
         <td><%= link_to 'Destroy', influencer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
 <%= link_to 'New Influencer', new_influencer_path %>
+<br>
