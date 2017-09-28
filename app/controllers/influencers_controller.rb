@@ -67,14 +67,14 @@ class InfluencersController < ApplicationController
   end
 
   def search_influencer
-    @search = Influencer.search(params[:search])
+    @search = Influencer.where('first_name ILIKE :search OR last_name ILIKE :search OR company ILIKE :search', search: params[:search])
 
   end
 
   def search
     redirect_to search_influencer_path(params[:q])
   end
-  
+
   def update_users_social
     Influencer.all.each do |influencer|
       if influencer.last_checked.nil? || influencer.last_checked < 30.minutes.ago
