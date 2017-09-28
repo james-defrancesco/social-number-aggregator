@@ -1,6 +1,6 @@
 class InfluencersController < ApplicationController
   before_action :set_influencer, only: [:show, :edit, :update, :destroy]
-  after_action :update_users_social, only: [:index]
+  ##after_action :update_users_social, only: [:index]
   after_action :get_user_social, only: [:edit, :update]
 
 
@@ -68,7 +68,7 @@ class InfluencersController < ApplicationController
 
   def search_influencer
     @search = Influencer.search(params[:search])
-    
+
   end
 
   def search
@@ -101,6 +101,7 @@ class InfluencersController < ApplicationController
           next
         end
       end
+      redirect_to root_path
     end
 
     def get_total_count
