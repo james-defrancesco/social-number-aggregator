@@ -2,12 +2,16 @@ class InfluencersController < ApplicationController
   before_action :set_influencer, only: [:show, :edit, :update, :destroy]
   ##after_action :update_users_social, only: [:index]
   after_action :get_user_social, only: [:edit, :update]
+  before_action :better_errors_hack, if: -> { Rails.env.development? }
 
 
   # GET /influencers
   # GET /influencers.json
   def index
-    @influencers = Influencer.alphabetically
+    @search = Influencer.search(params[:q])
+    @influencers = @search.result
+                          .alphabetically
+                          .page(params[:page])
     @count = get_total_count
   end
 
@@ -67,12 +71,14 @@ class InfluencersController < ApplicationController
   end
 
   def search_influencer
-    @search = Influencer.where('first_name ILIKE :search OR last_name ILIKE :search OR company ILIKE :search', search: params[:search])
-
+    @q = Influencer.ransack(params[:q])
+    @search = @q.result
   end
 
   def search
-    redirect_to search_influencer_path(params[:q])
+    # redirect_to search_influencer_path(params[:q])
+    @q = Influencer.ransack(params[:q])
+    @search = @q.result
   end
 
   def update_users_social
@@ -125,5 +131,9 @@ class InfluencersController < ApplicationController
       logger.info "\n\nuser info:\n\t#{@influencer.instagram}\n\n"
       logger.info "\n\nuser info:\n\t#{params.inspect}\n\n"
       @influencer.update_attributes! params
+    end
+
+    def better_errors_hack
+      request.env['puma.config'].options.user_options.delete :app
     end
 end

@@ -13,17 +13,16 @@
       <h1 class="">
         <%= link_to 'New Influencer', new_influencer_path %>
         <div class="control has-icons-left has-icons-right">
-          <%= form_tag search_influencer_influencers_path, method: 'get' do %>
-            <%= text_field_tag :search, params[:search], class: 'input is-large', placeholder: 'Search' %>
+          <%= search_form_for @search do |f| %>
+            <%= f.search_field :first_name_or_last_name_or_company_cont, class: 'input is-large', placeholder: 'Search' %>
               <span class="icon is-medium is-left">
-            <i class="fa fa-search"></i>
-          </span>
-
+                <i class="fa fa-search"></i>
+              </span>
 
               <span class="icon is-medium is-right">
-            <i class="fa fa-check"></i>
-          </span>
-              <% end %>
+                <i class="fa fa-check"></i>
+              </span>
+          <% end %>
         </div>
       </h1>
     </div>
@@ -33,7 +32,7 @@
 
 
 
-<table class="table is-striped">
+<table class="table is-striped is-fullwidth">
   <thead>
     <tr>
       <th>Full name</th>
@@ -78,5 +77,6 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @influencers %>
 <%= link_to 'New Influencer', new_influencer_path %>
 <br>

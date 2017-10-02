@@ -34,6 +34,8 @@ gem 'pg', '~> 0.19'
 gem 'devise', '~> 4.2'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'httparty', '~> 0.15.6'
+gem 'kaminari'
+gem 'ransack'
 
 
 group :development, :test do
@@ -47,6 +49,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'guard-rspec', require: false
+  gem 'pry'
 end
 
 group :development do

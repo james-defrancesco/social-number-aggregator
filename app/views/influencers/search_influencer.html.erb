@@ -15,12 +15,12 @@
           <%= form_tag search_influencer_influencers_path, method: 'get' do %>
             <%= text_field_tag :search, params[:search], class: 'input is-large', placeholder: 'Search' %>
               <span class="icon is-medium is-left">
-            <i class="fa fa-search"></i>
-          </span>
+                <i class="fa fa-search"></i>
+              </span>
               <span class="icon is-medium is-right">
-            <i class="fa fa-check"></i>
-          </span>
-              <% end %>
+                <i class="fa fa-check"></i>
+              </span>
+            <% end %>
         </div>
       </h1>
     </div>
@@ -72,6 +72,7 @@
         </td>
       </tr>
       <% end %>
+      <%= paginate @search, :window => 2 %>
   </tbody>
 </table>
 

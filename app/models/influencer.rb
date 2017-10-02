@@ -55,9 +55,9 @@ class Influencer < ApplicationRecord
     Rails.logger.info "\n\n\n #{data}\n\n\n"
   end
 
-  def self.search(search)
-    where('first_name ILIKE :search OR last_name ILIKE :search OR company ILIKE :search', search: "%#{search}%")
-  end
+  # def self.search(search)
+  #   where('first_name ILIKE :search OR last_name ILIKE :search OR company ILIKE :search', search: "%#{search}%")
+  # end
 
   def self.is_good_time
     where('last_checked < ?', 30.minutes.ago)
