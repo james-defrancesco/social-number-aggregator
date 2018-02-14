@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
   <%= link_to root_path do %>
-    <h1 class="title">INFLUENCERS</h1>
+    <h1 class="title">Project Octothorpe</h1>
     <% end %>
 </div>
 
@@ -35,13 +35,13 @@
 <table class="table is-striped is-fullwidth">
   <thead>
     <tr>
-      <th>Full name</th>
+      <th>Name</th>
+      <th style="text-align: left !important;">Company</th>
       <!-- <th>Facebook</th> -->
       <th style="text-align: right !important;">Instagram</th>
       <th style="text-align: right !important;">Twitter</th>
       <th style="text-align: right !important;">Youtube</th>
       <th style="text-align: right !important;">Total</th>
-      <th style="text-align: right !important;">Company</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -51,10 +51,11 @@
       <td></td>
       <td></td>
       <td></td>
-      <td class="align-right"><b>Total:</b></td>
+      <td></td>
+      <td class="align-right"><b>Total Reach:</b></td>
       <td class="align-right"><b><%= number_with_delimiter(@count, delimiter: ',') %><b></td>
       <td></td>
-      <td></td>
+      
     </tr>
   </tfoot>
 
@@ -62,6 +63,7 @@
     <% @influencers.each do |influencer| %>
       <tr>
         <td><%= "#{influencer.first_name} #{influencer.last_name}" %></td>
+        <td class="align-left"><%= influencer.company %></td>
         <!-- <td class="align-right"><%#= number_with_delimiter(Influencer.get_facebook_numbers(influencer.facebook), :delimiter => ',') %></td> -->
         <td class="align-right"><%= number_with_delimiter(influencer.ig, delimiter: ',')  %></td>
         <td class="align-right"><%= number_with_delimiter(influencer.tw, delimiter: ',')  %></td>
@@ -70,7 +72,6 @@
         <td class="align-right">
           <%= number_with_delimiter((influencer.ig.to_i + influencer.tw.to_i + influencer.yt.to_i), :delimiter => ',') %>
         </td>
-        <td class="align-right"><%= influencer.company %></td>
         <td><%= link_to 'Edit', edit_influencer_path(influencer) %></td>
         <td><%= link_to 'Destroy', influencer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
