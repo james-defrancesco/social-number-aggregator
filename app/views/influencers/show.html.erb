@@ -1,43 +1,63 @@
 <p id="notice"><%= notice %></p>
 
 <div class="profile-pic">
-  <h1>pic goes here</h1>
+  <%= image_tag @twitter_profile[:profile_image_url].to_s.sub("_normal", "") %> <br>
+  <p id="show_profile_info">Location:<br><%= @twitter_profile[:location] %></p> <br>
+  <p id="show_profile_info">Bio:<br><%= @twitter_profile[:description] %></p>
+
+  <div class="info">
+    <p>
+      <strong>First name:</strong>
+      <%= @influencer.first_name %>
+    </p>
+
+    <p>
+      <strong>Last name:</strong>
+      <%= @influencer.last_name %>
+    </p>
+
+    <!-- <p>
+      <strong>Facebook:</strong>
+      <%#= @influencer.facebook %>
+    </p> -->
+
+    <p>
+      <strong>Instagram:</strong>
+      <%= @influencer.instagram %>
+    </p>
+
+    <p>
+      <strong>Twitter:</strong>
+      <!-- <%= @influencer.twitter %> -->
+      <%= @twitter_profile[:followers_count] %>
+    </p>
+    <p>
+      <strong>Twitter Verified:</strong>
+      <%= @twitter_profile[:verified] %>
+    </p>
+
+    <p>
+      <strong>Youtube:</strong>
+      <%= @influencer.youtube %>
+    </p>
+
+    <p>
+      <strong>Company:</strong>
+      <%= @influencer.company %>
+    </p>
+
+    <!-- <%= link_to 'Edit', edit_influencer_path(@influencer) %> | -->
+    <%= link_to 'Back', root_path %><br><br>
+    <div class="contact_button">
+      <a href="/" class="contact_button">Contact Me</a>
+    </div><br>
+    <br>
+    <div class="section_edit">
+      <%= render 'form', influencer: @influencer %>
+    </div>
+
+  </div>
+
+
 </div>
-
-<p>
-  <strong>First name:</strong>
-  <%= @influencer.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @influencer.last_name %>
-</p>
-
-<!-- <p>
-  <strong>Facebook:</strong>
-  <%#= @influencer.facebook %>
-</p> -->
-
-<p>
-  <strong>Instagram:</strong>
-  <%= @influencer.instagram %>
-</p>
-
-<p>
-  <strong>Twitter:</strong>
-  <%= @influencer.twitter %>
-</p>
-
-<p>
-  <strong>Youtube:</strong>
-  <%= @influencer.youtube %>
-</p>
-
-<p>
-  <strong>Company:</strong>
-  <%= @influencer.company %>
-</p>
-
-<%= link_to 'Edit', edit_influencer_path(@influencer) %> |
-<%= link_to 'Back', root_path %>
+</div>

@@ -16,6 +16,19 @@ class Influencer < ApplicationRecord
     end
   end
 
+  def self.get_twitter_profile(user)
+    #return tw unless is_good_time.empty?
+    begin
+      TWITTER_CLIENT.user(user)
+    rescue Twitter::Error::TooManyRequests => e
+      sleepy_time = e.rate_limit.reset_in + 1
+      Rails.logger.info("following - sleeping #{distance_of_time_in_words Time.now, sleepy_time}")
+      return 'F: Check back in 1h'
+    rescue Twitter::Error::NotFound => e
+      return '*'
+    end
+  end
+
   def self.get_youtube_numbers(sub_id)
     #return unless is_good_time.empty?
     @id = sub_id
@@ -34,7 +47,7 @@ class Influencer < ApplicationRecord
     #return unless is_good_time.empty?
     begin
       ig = InstaScraper::HTML::Account.new(user.gsub(/^@/,''))
-      ig.data.deep_find('followed_by').fetch('count')
+      @instagram_following = ig.data.deep_find('followed_by').fetch('count')
     rescue
       return '*'
     end

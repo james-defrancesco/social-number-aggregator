@@ -18,6 +18,8 @@ class InfluencersController < ApplicationController
   # GET /influencers/1
   # GET /influencers/1.json
   def show
+    @influencer = Influencer.find(params[:id])
+    @twitter_profile = Influencer.get_twitter_profile(@influencer.twitter)
   end
 
   # GET /influencers/new

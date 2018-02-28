@@ -1,3 +1,4 @@
+
 //@import "bulma";
 @import "font-awesome";
 
@@ -5,6 +6,67 @@
   text-align: right;
 }
 
-h1 {
-  color: red;
+h1, h2 {
+  color: teal;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 42px;
+  text-decoration: none;
+
+
+}
+
+p, ol, ul, td, a  {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.contact_button {
+  font-size: 16px;
+  display: inline-block;
+  border-radius: 0.5rem;
+  //background-color: gray;
+  font-size: 1em;
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  background-position: right;
+  text-decoration: none;
+
+}
+
+
+.profile-pic {
+  display: block;
+  position: fixed;
+  //background-color: pink;
+  right: 50;
+  left: 50;
+  //float: right;
+  padding: 2rem;
+}
+
+.info {
+  display: inline-block;
+
+  //background-color: red;
+  height: auto;
+  padding: 2rem;
+  margin: 1rem;
+  float: left;
+  p {
+  font-size: 16px;
+  }
+
+}
+
+
+td {
+  padding: 0.5rem;
+  border-left:1px solid;
+
+}
+
+
+#show_profile_info {
+  font-size: 18px;
 }
