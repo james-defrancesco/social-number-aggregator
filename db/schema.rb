@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929202959) do
+ActiveRecord::Schema.define(version: 20180228150356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20170929202959) do
     t.string "yt"
     t.string "company"
     t.index ["first_name", "last_name", "company"], name: "index_influencers_on_first_name_and_last_name_and_company"
+  end
+
+  create_table "infos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -2,10 +2,12 @@
 <div class="container">
   <%= link_to root_path do %>
     <h1 class="title">Project Octothorpe</h1>
+
     <% end %>
+    <h2 class="title">Influencer Stat-form</h2>
 </div>
 
-<%=link_to "Update Numbers", "/update", :method => :post %>
+<%= link_to "Update Numbers", "/update", :method => :post %>
 
 <section class="hero">
   <div class="hero-body" style="padding: 3rem 0;">
@@ -52,10 +54,10 @@
       <td></td>
       <td></td>
       <td></td>
-      <td class="align-right"><b>Total Reach:</b></td>
-      <td class="align-right"><b><%= number_with_delimiter(@count, delimiter: ',') %><b></td>
       <td></td>
-      
+      <td class="align-right"><b>Our Total Reach:</b><%= number_with_delimiter(@count, delimiter: ',') %><b></td>
+      <td></td>
+
     </tr>
   </tfoot>
 
@@ -72,8 +74,9 @@
         <td class="align-right">
           <%= number_with_delimiter((influencer.ig.to_i + influencer.tw.to_i + influencer.yt.to_i), :delimiter => ',') %>
         </td>
+        <td><%= link_to 'Info', influencer, class: " " %></td>
         <td><%= link_to 'Edit', edit_influencer_path(influencer) %></td>
-        <td><%= link_to 'Destroy', influencer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', influencer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
